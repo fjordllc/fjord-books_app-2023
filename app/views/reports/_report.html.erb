@@ -1,0 +1,22 @@
+<div id="<%= dom_id report %>">
+  <p>
+    <strong><%= Report.human_attribute_name(:title) %>:</strong>
+    <%= report.title %>
+  </p>
+
+  <p>
+    <strong><%= Report.human_attribute_name(:content) %>:</strong>
+    <%= format_content report.content %>
+  </p>
+
+  <p>
+    <strong><%= Report.human_attribute_name(:user) %>:</strong>
+    <%= link_to report.user.name_or_email, report.user %>
+  </p>
+
+  <p>
+    <strong><%= Report.human_attribute_name(:created_on) %>:</strong>
+    <%= l report.created_on %>
+  </p>
+
+</div>

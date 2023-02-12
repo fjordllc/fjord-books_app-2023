@@ -1,0 +1,25 @@
+<div class="comments-container">
+  <strong><%= Comment.model_name.human %>:</strong>
+  <% if (comments = commentable.comments.order(:id).includes(:user).presence) %>
+    <ul>
+      <% comments.each do |comment| %>
+        <li>
+          <%= comment.content %>
+          <small>
+            (<%= link_to comment.user.name_or_email, comment.user %> - <%= l comment.created_at, format: :short %>)
+            <% if comment.user == current_user %>
+              <%= button_to t('.delete'), [comment], method: :delete, data: { turbo_confirm: t('views.common.delete_confirm') } %>
+            <% end %>
+          </small>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    (<%= t('.no_comments') %>)
+  <% end %>
+  <%= form_with model: [commentable, commentable.comments.new], local: true do |f| %>
+    <%# NOTE: ブラウザ側で必須チェックを行い、サーバーサイドの検証エラーを起きにくくする %>
+    <%= f.text_field :content, required: true %>
+    <%= f.submit t('.create') %>
+  <% end %>
+</div>
