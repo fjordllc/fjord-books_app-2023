@@ -1,14 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Books</h1>
+<h1><%= t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)) %></h1>
 
-<div id="books">
+<div id="books" class="index-items">
   <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
+    <div class="index-item">
+      <%= render book %>
+      <p>
+        <%= link_to t('views.common.show', name: Book.model_name.human.downcase), book %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New book", new_book_path %>
+<nav class="page-nav">
+  <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
+</nav>
