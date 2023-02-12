@@ -216,6 +216,10 @@ ja:
       create: コメントする
       delete: 削除
       no_comments: コメントはまだありません
+  reports:
+    mentions:
+      title: この日報に言及している日報
+      no_mentions: この日報に言及している日報はまだありません
   # devise-i18n-viewsをオーバーライド
   devise:
     registrations:

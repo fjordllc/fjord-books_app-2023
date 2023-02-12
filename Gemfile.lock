@@ -223,6 +223,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.5.0)
       loofah (~> 2.19, >= 2.19.1)
+    rails_autolink (1.1.7)
+      rails (> 3.1)
     railties (7.0.4.2)
       actionpack (= 7.0.4.2)
       activesupport (= 7.0.4.2)
@@ -328,6 +330,7 @@ DEPENDENCIES
   letter_opener_web
   puma (~> 5.0)
   rails (~> 7.0.4)
+  rails_autolink
   rubocop-fjord
   rubocop-rails
   selenium-webdriver
