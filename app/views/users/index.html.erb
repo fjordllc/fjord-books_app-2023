@@ -1,0 +1,14 @@
+<h1><%= t('views.common.title_index', name: i18n_pluralize(User.model_name.human)) %></h1>
+
+<div id="users" class="index-items">
+  <% @users.each do |user| %>
+    <div class="index-item">
+      <%= render user %>
+      <p>
+        <%= link_to t('views.common.show', name: User.model_name.human.downcase), user %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<%= paginate @users %>

@@ -1,0 +1,44 @@
+/****************
+Devise
+****************/
+
+.field > br {
+    display: none;
+}
+
+.field_with_errors {
+    display: inline;
+}
+
+.field_with_errors label {
+    color: var(--global-danger-c);
+}
+
+.field_with_errors input[type="text"],
+.field_with_errors input[type="email"],
+.field_with_errors input[type="password"],
+.field_with_errors textarea {
+    outline: solid 1px var(--global-danger-c);
+    background-color: var(--global-danger-bgc);
+}
+
+#error_explanation {
+    border: solid var(--global-bw) var(--global-danger-bc);
+    background-color: var(--global-danger-bgc);
+    color: var(--global-danger-c);
+    padding: 16px 24px;
+    border-radius: var(--global-br);
+}
+
+#error_explanation h2 {
+    font-size: var(--global-fz-md);
+    line-height: var(--global-headding-lh);
+    margin: 0;
+}
+
+#error_explanation ul {
+    font-size: var(--global-fz-md);
+    line-height: var(--global-lh);
+    margin: 12px 0 0;
+    padding-inline-start: 1em;
+}
