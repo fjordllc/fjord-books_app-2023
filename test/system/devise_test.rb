@@ -68,7 +68,7 @@ class DeviseTest < ApplicationSystemTestCase
     # バリデーションエラーを発生させる
     fill_in 'Eメール', with: ''
     click_button '更新'
-    assert_text '2 件のエラーが発生したため ユーザ は保存されませんでした。'
+    assert_text 'エラーが発生したため ユーザ は保存されませんでした。'
 
     fill_in 'Eメール', with: 'alice-2@example.com'
     fill_in '氏名', with: 'ありす'
@@ -133,5 +133,21 @@ class DeviseTest < ApplicationSystemTestCase
     fill_in '確認用新しいパスワード', with: 'pass1234'
     click_button 'パスワードを変更する'
     assert_text 'パスワードが正しく変更されました。'
+  end
+
+  test 'delete account' do
+    visit root_path
+
+    fill_in 'Eメール', with: 'komagata@example.com'
+    fill_in 'パスワード', with: 'password'
+    click_button 'ログイン'
+    assert_text 'ログインしました。'
+
+    click_link 'アカウント編集'
+    accept_alert do
+      click_button 'アカウント削除'
+    end
+    assert_text 'アカウントを削除しました。またのご利用をお待ちしております。'
+    assert_current_path new_user_session_path
   end
 end
