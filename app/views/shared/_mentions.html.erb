@@ -1,0 +1,17 @@
+<div>
+  <strong><%= t('views.reports.mention_list', name: i18n_pluralize(Report.model_name.human)) %>:</strong>
+  <% if mentioned_reports.presence %>
+    <ul>
+      <% mentioned_reports.each do |mentioned_report| %>
+        <li>
+          <%= link_to mentioned_report.title, report_path(mentioned_report.id) %>
+          <small>
+            (<%= link_to mentioned_report.user.name_or_email, mentioned_report.user %> - <%= l mentioned_report.created_at, format: :short %>)
+          </small>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    (<%= t('.no_mentions') %>)
+  <% end %>
+</div>

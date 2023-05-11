@@ -202,6 +202,8 @@ ja:
       previous: '‹ 前'
       next: '次 ›'
       truncate: '…'
+    reports:
+      mention_list: "この%{name}への言及"
   controllers:
     common:
       notice_create: "%{name}が作成されました。"
@@ -216,6 +218,8 @@ ja:
       create: コメントする
       delete: 削除
       no_comments: コメントはまだありません
+    mentions:
+      no_mentions: 言及はまだありません
   # devise-i18n-viewsをオーバーライド
   devise:
     registrations:

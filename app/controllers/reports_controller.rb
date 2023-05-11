@@ -9,6 +9,7 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @mentioned_reports = @report.mentioned_reports.order(created_at: :desc).order(id: :desc).includes(:user)
   end
 
   # GET /reports/new
@@ -20,8 +21,18 @@ class ReportsController < ApplicationController
 
   def create
     @report = current_user.reports.new(report_params)
+    #host = "http://localhost:3000/"
 
     if @report.save
+      # if @report.content.include?(host)
+      if contains_mentions?
+        mentioned_params = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).uniq
+        after_flatten = mentioned_params.flatten#.uniq
+        after_flatten.each do |r|
+          @mention = Mention.new(mentioning_report_id: @report.id, mentioned_report_id: r.to_i)
+          @mention.save
+        end
+      end
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
@@ -50,5 +61,10 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :content)
+  end
+
+  def contains_mentions?
+    host = "http://localhost:3000/" # 定数にするか要検討
+    @report.content.include?(host)
   end
 end
