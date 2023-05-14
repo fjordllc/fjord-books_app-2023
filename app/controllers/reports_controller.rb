@@ -20,23 +20,43 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    @report = current_user.reports.new(report_params)
-    #host = "http://localhost:3000/"
-
-    if @report.save
-      # if @report.content.include?(host)
+    all_save = true
+    Report.transaction do
+      @report = current_user.reports.new(report_params)
+      all_save &= @report.save
       if contains_mentions?
         mentioned_params = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).uniq
-        after_flatten = mentioned_params.flatten#.uniq
-        after_flatten.each do |r|
-          @mention = Mention.new(mentioning_report_id: @report.id, mentioned_report_id: r.to_i)
-          @mention.save
+        after_flattens = mentioned_params.flatten
+        after_flattens.each do |r|
+          @mention = Mention.new(mentioning_report_id: @report.id, mentioned_report_id: r)#"テスト")#r)#.to_i)
+          all_save &= @mention.save
         end
       end
+      raise ActiveRecord::Rollback unless all_save
+    end
+    if all_save
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
+      flash.now[:notice] = t('controllers.common.failed_post')
       render :new, status: :unprocessable_entity
     end
+    # ActiveRecord::Base.transaction do # 追記
+    #   @report = current_user.reports.new(report_params)
+
+    #   if @report.save!
+    #     if contains_mentions?
+    #       mentioned_params = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).uniq
+    #       after_flattens = mentioned_params.flatten
+    #       after_flattens.each do |r|
+    #         @mention = Mention.new(mentioning_report_id: @report.id, mentioned_report_id: "テスト")#r)#.to_i)
+    #         @mention.save!
+    #     end
+    #   end
+    #     redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+    #   else
+    #     render :new, status: :unprocessable_entity
+    #   end
+    # end
   end
 
   def update
