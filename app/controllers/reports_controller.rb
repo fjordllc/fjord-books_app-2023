@@ -20,26 +20,63 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    all_save = true
-    Report.transaction do
+    # 3.エラーの条件分岐を試みたコード
+    
+    ActiveRecord::Base.transaction do
       @report = current_user.reports.new(report_params)
-      all_save &= @report.save
+      saveable_report = @report.save
+      unless saveable_report
+        #flash.now[:notice] = t('controllers.common.failed_post')
+        render :new, status: :unprocessable_entity
+        raise ActiveRecord::Rollback
+      end
       if contains_mentions?
         mentioned_params = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).uniq
         after_flattens = mentioned_params.flatten
         after_flattens.each do |r|
-          @mention = Mention.new(mentioning_report_id: @report.id, mentioned_report_id: r)#"テスト")#r)#.to_i)
-          all_save &= @mention.save
+          @mention = Mention.new(mentioning_report_id: @report.id, mentioned_report_id: "テスト")#r)#.to_i)
+          saveable_mention = @mention.save
+          unless saveable_mention
+            #flash.now[:notice] = "mention保存失敗"
+            #render :new, status: :unprocessable_entity
+            render 'public/500.ja.html', status: :internal_server_error
+            raise ActiveRecord::Rollback
+          end
         end
       end
-      raise ActiveRecord::Rollback unless all_save
-    end
-    if all_save
+  
+    if saveable_report || saveable_mention 
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    else
-      flash.now[:notice] = t('controllers.common.failed_post')
-      render :new, status: :unprocessable_entity
     end
+  end
+    # else
+    #   flash.now[:notice] = t('controllers.common.failed_post')
+    #   render :new, status: :unprocessable_entity
+    #end
+
+    # 2.all_saveを使ってみたコード
+    # all_save = true
+    # Report.transaction do
+    #   @report = current_user.reports.new(report_params)
+    #   all_save &= @report.save
+    #   if contains_mentions?
+    #     mentioned_params = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).uniq
+    #     after_flattens = mentioned_params.flatten
+    #     after_flattens.each do |r|
+    #       @mention = Mention.new(mentioning_report_id: @report.id, mentioned_report_id: "テスト")#r)#.to_i)
+    #       all_save &= @mention.save
+    #     end
+    #   end
+    #   raise ActiveRecord::Rollback unless all_save
+    # end
+    # if all_save
+    #   redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+    # else
+    #   flash.now[:notice] = t('controllers.common.failed_post')
+    #   render :new, status: :unprocessable_entity
+    # end
+
+    # 1.元のコードにtransactonを加えたコード
     # ActiveRecord::Base.transaction do # 追記
     #   @report = current_user.reports.new(report_params)
 
