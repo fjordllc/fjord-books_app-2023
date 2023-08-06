@@ -165,4 +165,25 @@ ApplicationRecord.transaction do # rubocop:disable Metrics/BlockLength
   end
 end
 
+mention_texts = <<~TEXT.lines(chomp: true)
+  この日報を参考にさせてもらいました。
+  この日報が役に立ちました。
+  昨日こちらの日報を読みました。
+  この日報に書かれている内容が素敵だなと思いました。
+  以下の日報に手順が書いてありました。
+TEXT
+Report.transaction do
+  # 先頭の20件には何らかのメンションをランダムに付ける
+  Report.order(id: :desc).limit(20).each do |report|
+    mention_count = rand(0..5)
+    mentioning_reports = Report.where('id > ?', report.id).to_a.sample(mention_count)
+    mentioning_reports.each do |mentioning_report|
+      mentioning_report.update!(content: <<~CONTENT)
+        #{mention_texts.sample}
+        http://localhost:3000/reports/#{report.id}
+      CONTENT
+    end
+  end
+end
+
 puts '初期データの投入が完了しました。' # rubocop:disable Rails/Output
