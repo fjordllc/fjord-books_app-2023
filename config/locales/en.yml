@@ -228,8 +228,19 @@ en:
       title_edit: "Editing %{name}"
       error: error
       validation_error: "%{errors} prohibited this %{name} from being saved"
+      title_show: "%{name} details"
+      sign_out: "Sign out"
   controllers:
     common:
       notice_create: "%{name} was successfully created."
       notice_update: "%{name} was successfully updated."
       notice_destroy: "%{name} was successfully destroyed."
+  layouts:
+    application:
+      menu: Menu
+      sign_in_as: "Sign-in as %{user}"
+  # devise-i18n-viewsをオーバーライド
+  devise:
+    registrations:
+      edit:
+        title: "Edit account"
