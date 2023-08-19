@@ -3,7 +3,11 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'name_or_email' do
+    user = users(:komagata)
+    assert_equal '駒形 真幸', user.name_or_email
+
+    user.name = ''
+    assert_equal 'komagata@example.com', user.name_or_email
+  end
 end
