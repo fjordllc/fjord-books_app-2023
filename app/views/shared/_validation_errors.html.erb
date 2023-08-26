@@ -1,0 +1,11 @@
+<% if resource.errors.any? %>
+  <div style="color: red">
+    <h2><%= t('views.common.validation_error', errors: i18n_error_count(resource.errors.count), name: resource.class.model_name.human.downcase) %>:</h2>
+
+    <ul>
+      <% resource.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

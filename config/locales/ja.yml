@@ -208,9 +208,14 @@ ja:
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
   layouts:
-    application:
+    menu:
       menu: メニュー
       sign_in_as: "%{user} としてログイン中"
+  shared:
+    comments:
+      create: コメントする
+      delete: 削除
+      no_comments: コメントはまだありません
   # devise-i18n-viewsをオーバーライド
   devise:
     registrations:

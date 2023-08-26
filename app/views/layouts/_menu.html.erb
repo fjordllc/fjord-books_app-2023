@@ -1,0 +1,26 @@
+<div class="menu-container">
+  <div class="title"><%= t('.menu') %></div>
+  <ul>
+    <li>
+      <%= link_to Book.model_name.human, books_path %>
+    </li>
+    <li>
+      <%= link_to User.model_name.human, users_path %>
+    </li>
+    <li>
+      <%= link_to Report.model_name.human, reports_path %>
+    </li>
+  </ul>
+  <div class="title">
+    <%# html_safeを使っているが、XSSは発生しないのを確認済み %>
+    <%= t('.sign_in_as', user: link_to(current_user_name(current_user), current_user)).html_safe %>
+  </div>
+  <ul>
+    <li>
+      <%= link_to t('devise.registrations.edit.title'), edit_user_registration_path %>
+    </li>
+    <li>
+      <%= link_to t('views.common.sign_out'), destroy_user_session_path, data: { turbo_method: :delete } %>
+    </li>
+  </ul>
+</div>

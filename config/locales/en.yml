@@ -236,7 +236,7 @@ en:
       notice_update: "%{name} was successfully updated."
       notice_destroy: "%{name} was successfully destroyed."
   layouts:
-    application:
+    menu:
       menu: Menu
       sign_in_as: "Sign-in as %{user}"
   # devise-i18n-viewsをオーバーライド
