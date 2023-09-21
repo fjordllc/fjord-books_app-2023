@@ -194,6 +194,12 @@ ja:
       title_edit: "%{name}の編集"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
+    pagination:
+      first: '« 最初'
+      last: '最後 »'
+      previous: '‹ 前'
+      next: '次 ›'
+      truncate: '…'
   controllers:
     common:
       notice_create: "%{name}が作成されました。"

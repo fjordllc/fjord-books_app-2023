@@ -66,6 +66,7 @@ group :development do
   # gem "spring"
 
   gem 'erb_lint', require: false
+  gem 'faker'
   gem 'i18n_generators'
   # 以下のPRがリリースされたら最新のrubocopを使うようにする
   # https://github.com/fjordllc/rubocop-fjord/pull/16
@@ -81,3 +82,4 @@ group :test do
 end
 
 gem 'carrierwave'
+gem 'kaminari'
