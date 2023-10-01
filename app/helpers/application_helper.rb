@@ -14,4 +14,12 @@ module ApplicationHelper
   def i18n_error_count(count)
     I18n.locale == :ja ? "#{count}件の#{t('views.common.error')}" : pluralize(count, t('views.common.error'))
   end
+
+  def format_content(content)
+    safe_join(content.split("\n"), tag.br)
+  end
+
+  def format_time_to_jst(time)
+    time.in_time_zone('Tokyo').strftime('%Y-%m-%d %H:%M:%S')
+  end
 end

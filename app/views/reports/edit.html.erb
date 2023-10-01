@@ -1,0 +1,10 @@
+<h1><%= t('views.common.title_edit', name: Report.model_name.human.downcase) %></h1>
+
+<%= render "form", report: @report %>
+
+<br>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.show', name: Report.model_name.human.downcase), @report %> |
+  <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
+</nav>
