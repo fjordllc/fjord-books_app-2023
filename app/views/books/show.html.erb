@@ -1,7 +1,7 @@
 <h1><%= t('views.common.title_show', name: Book.model_name.human) %></h1>
 
 <div class="show-item">
-  <%= render @book %>
+  <%= render partial: 'books/book', object: @book %>
 </div>
 
 <nav class="page-nav">
@@ -10,3 +10,6 @@
 
   <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
 </nav>
+
+<%= render 'shared/comment_form', commentable: @book, comment: @comment %>
+<%= render 'shared/comments', comments: @comments %>

@@ -216,3 +216,10 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  shared:
+    comments:
+      edit: 編集する
+      delete: 削除する
+      nothing: コメントはまだありません
+    comment_form:
+      create: コメントする
