@@ -19,7 +19,7 @@
       </div>
       <nav class="page-nav">
         <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase), edit_report_path(comment) if comment.user_id == current_user.id %> |
-        <%= link_to t('views.common.destroy', name: Comment.model_name.human.downcase), comment, method: :delete if comment.user_id == current_user.id %>
+        <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase), comment, method: :delete if comment.user_id == current_user.id %>
       </nav>
     <% end %>
   <% else %>
