@@ -76,11 +76,11 @@ User.order(:id).each.with_index(1) do |user, n|
 end
 
 Report.transaction do
-  User.all.each do |user|
+  User.all.find_each do |user|
     10.times do |n|
       Report.create!(
         title: "#{user.name}の日報その#{n}",
-        content: "テスト",
+        content: 'テスト',
         user_id: user.id
       )
     end

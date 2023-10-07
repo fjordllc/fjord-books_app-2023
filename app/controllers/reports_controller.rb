@@ -17,8 +17,7 @@ class ReportsController < ApplicationController
     @report = Report.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @report = Report.new(report_params)
@@ -35,13 +34,13 @@ class ReportsController < ApplicationController
       redirect_to report_url(@report), notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
-  end
+    end
   end
 
   def destroy
     @report.destroy
 
-    respond_to do |format|
+    respond_to do |_format|
       redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
     end
   end

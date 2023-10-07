@@ -12,7 +12,7 @@
           <strong><%= Comment.human_attribute_name(:created_at) %>:</strong>
           <%= format_time_to_jst(comment.created_at) %>
         </p>
-        <p >
+        <p>
           <strong><%= Comment.human_attribute_name(:content) %>:</strong><br>
           <%= format_content(comment.content) %>
         </p>
@@ -26,5 +26,3 @@
     <%= t('.nothing') %>
   <% end %>
 </div>
-
-
