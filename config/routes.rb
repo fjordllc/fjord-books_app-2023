@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   end
 
   resources :reports do
-    resources :comments, only: %i[create], module: :reports
+    resources :comments, only: %i[create edit update destroy], module: :reports
   end
 end
- 
