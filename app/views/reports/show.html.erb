@@ -10,5 +10,4 @@
   <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete if @report.user_id == current_user.id %>
 </nav>
 
-<%= render 'shared/comment_form', commentable: @report, comment: @comment %>
-<%= render 'shared/comments', comments: @comments %>
+<%= render 'shared/comment', commentable: @report, comment: @comment, comments: @comments %>
