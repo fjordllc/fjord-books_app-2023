@@ -2,7 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
-  before_action :set_commentable, only: %i[edit update destroy]
+  before_action :set_commentable, only: %i[create edit update destroy]
   before_action :check_user, only: %i[edit update destroy]
 
   def create
