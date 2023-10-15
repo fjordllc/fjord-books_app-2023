@@ -22,4 +22,8 @@ module ApplicationHelper
   def format_time_to_jst(time)
     time.in_time_zone('Tokyo').strftime('%Y-%m-%d %H:%M:%S')
   end
+
+  def turbo_stream_flash
+    turbo_stream.update 'flash', partial: 'shared/flash'
+  end
 end

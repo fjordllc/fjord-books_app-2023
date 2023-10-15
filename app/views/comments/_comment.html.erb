@@ -1,0 +1,21 @@
+<%= turbo_frame_tag comment do %>
+  <div class="show-item">
+    <p>
+      <strong><%= Comment.human_attribute_name(:user) %>:</strong>
+      <%= current_user_name(comment.user) %>
+    </p>
+    <p>
+      <strong><%= Comment.human_attribute_name(:created_at) %>:</strong>
+      <%= format_time_to_jst(comment.created_at) %>
+    </p>
+    <p>
+      <strong><%= Comment.human_attribute_name(:content) %>:</strong><br>
+      <%= format_content(comment.content) %>
+    </p>
+
+    <div>
+      <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase), edit_polymorphic_path([comment.commentable, comment]) if comment.user_id == current_user.id %> |
+      <%= link_to t('views.common.destroy', name: Comment.model_name.human.downcase), polymorphic_path([comment.commentable, comment]), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } if comment.user_id == current_user.id %>
+    </div>
+  </div>
+<% end %>

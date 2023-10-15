@@ -1,5 +1,4 @@
-<h2><%= t(Comment.model_name.human) %></h2>
-<div>
+<%= turbo_frame_tag comment do %>
   <%= form_with model: [commentable, comment], local: true do |form| %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <% if @comment.errors.any? %>
@@ -13,6 +12,7 @@
       </div>
     <% end %>
     <%= form.text_area :content, required: true %>
-    <%= form.submit t('.create') %>
+    <%= form.submit %>
+    <%= link_to "キャンセル", commentable %>
   <% end %>
-</div>
+<% end %>

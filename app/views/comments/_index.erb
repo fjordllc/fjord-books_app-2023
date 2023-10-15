@@ -1,0 +1,11 @@
+<h2><%= t('views.common.title_index', name: i18n_pluralize(Comment.model_name.human)) %></h2>
+
+<div id="comments">
+  <% if comments.any? %>
+    <% comments.each do |comment| %>
+      <%= render 'comments/comment', comment: comment %>
+    <% end %>
+  <% else %>
+    <%= t('views.comments.nothing') %>
+  <% end %>
+</div>
