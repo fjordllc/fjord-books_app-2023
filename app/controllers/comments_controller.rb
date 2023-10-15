@@ -2,7 +2,8 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
-  before_action :set_commentable, only: :edit
+  before_action :set_commentable, only: %i[edit update destroy]
+  before_action :check_user, only: %i[edit update destroy]
 
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -26,15 +27,11 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       flash.now.notice = t('controllers.common.notice_update', name: Comment.model_name.human)
     else
-      render :edit, status, unprocessable_eintity
+      render_commentable
     end
   end
 
   private
-
-  def set_commentable
-    @commentable = @comment.commentable
-  end
 
   def set_comment
     @comment = Comment.find(params[:id])
@@ -42,5 +39,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content, :user_id)
+  end
+
+  def check_user
+    redirect_to @commentable unless @comment.user_id == current_user.id
   end
 end
