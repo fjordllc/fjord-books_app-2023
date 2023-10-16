@@ -1,6 +1,14 @@
-<%= turbo_stream.prepend 'comments' do %>
-  <%= render partial: 'comments/comment',
-             locals: {comment: @comment} %>
+<!-- 初めてのコメントの場合はコメント無のメッセージを更新するためにupdateメソッドを呼び、2つ目以降の場合はprependメソッドを呼ぶ -->
+<% if @commentable.comments.size == 1 %>
+  <%= turbo_stream.update 'comments' do %>
+    <%= render partial: 'comments/comment',
+              locals: {comment: @comment} %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.prepend 'comments' do %>
+    <%= render partial: 'comments/comment',
+              locals: {comment: @comment} %>
+  <% end %>
 <% end %>
 
 <%= turbo_stream.update 'new_comment' do %>
