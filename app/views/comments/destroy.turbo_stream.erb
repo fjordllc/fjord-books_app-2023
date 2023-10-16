@@ -1,2 +1,9 @@
-<%= turbo_stream.remove @comment %>
+<% if @commentable.comments.any? %>
+  <%= turbo_stream.remove @comment %>
+<% else %>
+  <%= turbo_stream.update 'comments' do %>
+    <%= t('views.comments.nothing') %>
+  <% end %>
+<% end %>
+
 <%= turbo_stream_flash %>
