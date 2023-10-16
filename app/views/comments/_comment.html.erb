@@ -14,8 +14,10 @@
     </p>
 
     <div>
-      <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase), edit_polymorphic_path([comment.commentable, comment]) if comment.user_id == current_user.id %> |
-      <%= link_to t('views.common.destroy', name: Comment.model_name.human.downcase), polymorphic_path([comment.commentable, comment]), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } if comment.user_id == current_user.id %>
+      <% if comment.user_id == current_user.id %>
+        <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase), edit_polymorphic_path([comment.commentable, comment]) %> |
+        <%= link_to t('views.common.destroy', name: Comment.model_name.human.downcase), polymorphic_path([comment.commentable, comment]), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+      <% end %>
     </div>
   </div>
 <% end %>
