@@ -40,9 +40,7 @@ class ReportsController < ApplicationController
   def destroy
     @report.destroy
 
-    respond_to do |_format|
-      redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
-    end
+    redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
 
   private
