@@ -5,6 +5,7 @@
 
 <div class="field">
   <%= f.label :avatar %><br />
+  <div><%= image_tag resource.avatar.variant(resize_to_limit: [100, 100]) if resource.avatar.attached? %></div><br />
   <%= f.file_field :avatar %>
 </div>
 
