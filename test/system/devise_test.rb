@@ -29,7 +29,7 @@ class DeviseTest < ApplicationSystemTestCase
     assert_text 'アリス としてログイン中'
 
     # ログアウトとログイン
-    click_link 'ログアウト'
+    click_button 'ログアウト'
     assert_text 'ログアウトしました。'
     assert_css 'h2', text: 'ログイン'
 
@@ -99,7 +99,7 @@ class DeviseTest < ApplicationSystemTestCase
     assert_text 'アカウント情報を変更しました。'
     assert_current_path user_path(user)
 
-    click_link 'ログアウト'
+    click_button 'ログアウト'
     assert_text 'ログアウトしました。'
     assert_css 'h2', text: 'ログイン'
     fill_in 'Eメール', with: 'alice-2@example.com'

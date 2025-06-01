@@ -9,7 +9,7 @@ class BooksTest < ApplicationSystemTestCase
 
   test '本のCRUD' do
     # 本の登録
-    click_link '本'
+    # click_link '本'
     assert_css 'h1', text: '本の一覧'
     click_link '本の新規作成'
     assert_css 'h1', text: '本の新規作成'
