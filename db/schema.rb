@@ -89,7 +89,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_05_022253) do
     t.string "postal_code"
     t.string "address"
     t.text "self_introduction"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
