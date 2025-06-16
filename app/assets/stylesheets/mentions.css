@@ -1,0 +1,40 @@
+/****************
+mentions-container
+****************/
+
+.mentions-container {
+    margin-top: 32px;
+    max-width: var(--single-column-w);
+}
+
+.mentions-container p {
+    font-size: var(--global-fz-md);
+    line-height: 1.8;
+}
+
+.mentions-container ul {
+    margin: 12px 0 0;
+    padding-inline-start: 0;
+    list-style: none;
+}
+
+.mentions-container li {
+    padding-bottom: 12px;
+    font-size: var(--global-fz-md);
+    line-height: 1.8;
+}
+
+.mentions-container li:not(:first-of-type) {
+    border-top: solid var(--global-bw) var(--global-bc-muted);
+    padding-top: 12px;
+}
+
+.mentions-container li:last-of-type {
+    padding-bottom: 0;
+}
+
+.mentions-container li small {
+    display: block;
+    font-size: 12px;
+    margin-top: 8px;
+}

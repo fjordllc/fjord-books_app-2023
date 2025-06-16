@@ -6,7 +6,7 @@
 
   <p>
     <strong><%= Report.human_attribute_name(:content) %>:</strong>
-    <%= format_content report.content %>
+    <%= auto_link(format_content(report.content)) %>
   </p>
 
   <p>

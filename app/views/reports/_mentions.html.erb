@@ -1,0 +1,17 @@
+<div class="mentions-container">
+  <strong><%= t('.title') %>:</strong>
+  <% if mentioned_reports = report.mentioned_reports.includes(mentioned_reports: :user).order(id: :desc).presence %>
+    <ul>
+      <% mentioned_reports.each do |mentioned_report| %>
+        <li>
+          <%= link_to mentioned_report.title, mentioned_report %>
+          <small>
+            (<%= link_to mentioned_report.user.name_or_email, mentioned_report.user %> - <%= l mentioned_report.created_on %>)
+          </small>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>（<%= t('.no_mentions') %>）</p>
+  <% end %>
+</div>
