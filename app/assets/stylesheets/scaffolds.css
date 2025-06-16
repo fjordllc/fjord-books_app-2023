@@ -144,6 +144,22 @@ h3 {
   background-color: var(--global-secondary-bgc-hover);
 }
 
+.comment-update-form button[type="submit"],
+.comment-update-form input[type="submit"] {
+  color: var(--global-c);
+  font-weight: normal;
+  background-color: var(--global-secondary-bgc);
+  border: solid var(--global-bw) var(--global-secondary-bgc-hover);
+  border-radius: var(--global-br);
+  height: 2em;
+  padding: 0 .75em;
+}
+
+.comment-update-form button[type="submit"]:hover,
+.comment-update-form input[type="submit"]:hover {
+  background-color: var(--global-secondary-bgc-hover);
+}
+
 /****************
 page-nav
 ****************/
@@ -153,10 +169,39 @@ page-nav
   --nav-mt: 24px;
   font-size: var(--nav-fz);
   margin-top: var(--nav-mt);
+  margin-bottom: var(--nav-mt);
 }
 
 .page-nav .button_to {
   margin-top: var(--nav-mt);
+}
+
+.pager-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.pager {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-bottom: 0px;
+  min-height: 34px;
+  min-width: 64px;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+  width: 250px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background-color 0.1s ease-out, border-color;
+  border: 1px solid var(--global-c);
+  padding: 8px 16px;
 }
 
 /****************
@@ -264,7 +309,7 @@ Show
 New and Edit
 ****************/
 
-form:not(.button_to) {
+form:not(.button_to, .comment-update-form) {
   --main-button-fz: 16px;
   --main-button-w: 160px;
   --main-button-h: 44px;

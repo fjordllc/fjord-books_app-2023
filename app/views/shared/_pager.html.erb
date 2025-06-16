@@ -1,0 +1,5 @@
+<div id="pager" class="pager-container">
+  <% if records.next_page %>
+    <%= link_to t(".load_more"), path_to_next_page(records), data: { turbo_stream: "" }, class: "pager" %>
+  <% end %>
+</div>

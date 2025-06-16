@@ -48,6 +48,10 @@ comments-container
     margin-left: 4px;
 }
 
+.comments-container .comment-update-form input[type="submit"] {
+    font-size: var(--global-fz-sm);
+}
+
 .comments-container form {
     margin-top: 16px;
 }

@@ -1,0 +1,12 @@
+<li id="<%= dom_id(comment) %>">
+  <%= turbo_frame_tag(comment, 'form') do %>
+    <%= comment.content %>
+    <small>
+      (<%= link_to comment.user.name_or_email, comment.user %> - <%= l comment.created_at, format: :short %>)
+      <% if comment.user == current_user %>
+        <%= link_to t('.edit'), [:edit, comment] %>
+        <%= button_to t('.delete'), [comment], method: :delete, data: { turbo_confirm: t('views.common.delete_confirm') } %>
+      <% end %>
+    </small>
+  <% end %>
+</li>

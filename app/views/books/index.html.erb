@@ -1,18 +1,11 @@
 <h1><%= t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)) %></h1>
 
+<nav class="page-nav">
+  <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
+</nav>
+
 <div id="books" class="index-items">
-  <% @books.each do |book| %>
-    <div class="index-item">
-      <%= render book %>
-      <p>
-        <%= link_to t('views.common.show', name: Book.model_name.human.downcase), book %>
-      </p>
-    </div>
-  <% end %>
+  <%= render partial: 'book_item', collection: @books, as: :book %>
 </div>
 
-<%= paginate @books %>
-
-<nav class="page-nav">
-    <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
-</nav>
+<%= render 'shared/pager', records: @books %>

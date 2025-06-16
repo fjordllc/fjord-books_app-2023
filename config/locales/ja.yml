@@ -212,10 +212,17 @@ ja:
       menu: メニュー
       sign_in_as: "%{user} としてログイン中"
   shared:
-    comments:
-      create: コメントする
+    comment_content:
+      edit: 編集
       delete: 削除
-      no_comments: コメントはまだありません
+    comments:
+      no_comments: (コメントはまだありません)
+    comment_form:
+      create: コメントする
+      update: 更新する
+      cancel: キャンセル
+    pager:
+      load_more: さらに読み込む
   reports:
     mentions:
       title: この日報に言及している日報

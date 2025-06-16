@@ -1,0 +1,6 @@
+<%= turbo_stream.remove @comment %>
+<% unless @commentable.comments.exists? %>
+  <%= turbo_stream.update 'no-comments' do %>
+    <%= render inline: t('shared.comments.no_comments') %>
+  <% end %>
+<% end %>

@@ -1,0 +1,2 @@
+<%= turbo_stream.append "books", partial: 'book_item', collection: @books, as: :book %>
+<%= turbo_stream.replace "pager", partial: 'shared/pager', locals: { records: @books } %>

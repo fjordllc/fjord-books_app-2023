@@ -1,0 +1,15 @@
+<% comment ||= commentable.comments.new %>
+<% model = comment.new_record? ? [commentable, comment] : comment %>
+<% form_class = comment.new_record? ? 'comment-create-form' : 'comment-update-form' %>
+<%= form_with model: model, class: form_class do |f| %>
+  <%# NOTE: ブラウザ側で必須チェックを行い、サーバーサイドの検証エラーを起きにくくする %>
+  <%= f.text_field :content, required: true %>
+  <% if comment.new_record? %>
+    <%= f.submit t('.create') %>
+  <% else %>
+    <small>
+      <%= f.submit t('.update'), class: 'comment-update' %>
+      <%= link_to t('.cancel'), comment %>
+    </small>
+  <% end %>
+<% end %>

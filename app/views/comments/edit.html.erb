@@ -1,0 +1,3 @@
+<%= turbo_frame_tag(@comment, 'form') do %>
+  <%= render 'shared/comment_form', commentable: @comment.commentable, comment: @comment %>
+<% end %>

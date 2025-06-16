@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'no-comments' do %>
+  <%= render inline: '' %>
+<% end %>
+<%= turbo_stream.append 'comments', partial: 'shared/comment_content', locals: { comment: @comment } %>
+<%= turbo_stream.update "comment_form", partial: 'shared/comment_form', locals: { commentable: @commentable } %>
